@@ -1,6 +1,17 @@
+package es.unileon.prg1.wordle;
+
+import java.util.Random;
 import java.util.Scanner;
 
-//simon feb 25 2022
+/**
+ * Clase Main, que corre el juego completo
+ *
+ * @author josedm64
+ * @author usuarioDeGitHub
+ *
+ * @version 1.0
+ */
+
 public class Main {
 
     //Constantes
@@ -11,10 +22,14 @@ public class Main {
     //Escáner
     public static Scanner scan = new Scanner(System.in);
 
-
-    //Función principal
     public static void main(String[] args) {
 
+        Random randomNumber = new Random();
+        randomNumber.setSeed(System.currentTimeMillis());
+        int index = randomNumber.nextInt(6 + 1);
+
+        System.out.println(index);
+        /*
         //Inicialización de tiempo e intentos
         long tiempoInicio = System.currentTimeMillis();
         int intentos = 0;
@@ -55,8 +70,16 @@ public class Main {
 
         //Enseña tiempo y aciertos al finalizar el programa
         System.out.println("Respuesta correcta, has tardado " + ((System.currentTimeMillis() - tiempoInicio) / 1000) + " segundos y " + intentos + " intentos.");
+
+         */
     }
 
+    /**
+     * Colorea las palabras en función de lo correctas que sean
+     * @param palabraUsuario palabra introducida por el usuario
+     * @param palabraCorrecta palabra secreta
+     * @return palabra coloreada
+     */
     public static boolean colorLetras(char[] palabraUsuario, char[] palabraCorrecta) {
         boolean correcta = true;
         int[] colorDeLetra = new int[5];
