@@ -11,62 +11,30 @@ package es.unileon.prg1.wordle;
  * @version 0.0
  */
 public class Board {
-    private Dictionary dictionary;
-    private int tries;
-    private boolean developerMode;
+    private Word[] attempts;
+    private int next;
 
-    /**
-     *
-     * @return diccionario usado
-     */
-    public Dictionary getDictionary() {
-        return dictionary;
-    }
-
-    /**
-     *
-     * @param dictionary diccionario por el que se modifica el atributo dictionary
-     */
-    public void setDictionary(Dictionary dictionary) {
-        this.dictionary = dictionary;
-    }
-
-    /**
-     *
-     * @return numero de intentos
-     */
-    public int getTries() {
-        return tries;
-    }
-
-    /**
-     *
-     * @param tries intentos maximos
-     */
-    public void setTries(int tries) {
-        if(tries<1){
-            throw new WordleException("El número de intentos debe ser mínimo 1")
+    //Constructor
+    public Board(int nTries) throws WordleException {
+        if(nTries < 1){
+            throw new WordleException("El número de intentos no puede ser menor de uno");
         }
-        this.tries = tries;
+        attempts = new Word[nTries];
     }
 
-    /**
-     *
-     * @return boolean diciendo si esta en developerMode
-     */
-    public boolean isDeveloperMode() {
-        return developerMode;
+    public int getNext(){
+        return next;
     }
 
-    /**
-     *
-     * @param developerMode boolean que enciende/apaga el developerMode
-     */
-    public void setDeveloperMode(boolean developerMode) {
-        this.developerMode = developerMode;
+    public int length(){
+        return attempts.length;
     }
 
-    public String developerMode() {
+    public void setAttempts(Word word, int position){
+        attempts[position] = word;
+    }
 
+    public String getAttemptedWordAt(int position) {
+        return attempts[position].toString();
     }
 }

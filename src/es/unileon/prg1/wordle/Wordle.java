@@ -63,22 +63,15 @@ public class Wordle {
     public Word getSecretWord() {
         return secretWord;
     }
-    /**
-     * Getter de board
-     * @return el board actual
-     */
-    public Board getBoard() {
-        return board;
-    }
 
     /**
      * Clase que comprueba que el intento es válido
      * @param word palabra a validar
      */
-    public void play(String word) {
-            Word wordTry = new Word(word);
-            this.newTry(wordTry);
-            this.board.getBoard()[this.board.getBoard().next]=wordTry;
+    public void newPlay(String word){
+        Word wordTry = new Word(word);
+        newTry(wordTry);
+        board.setAttempts(wordTry, board.getNext());
     }
 
     /**
@@ -113,7 +106,7 @@ public class Wordle {
      * @return True si se ha ganado la partida
      */
     public boolean win(String word){
-        return word.equals(this.secretWord);
+        return word.equals(secretWord.toString());
     }
 
     /**
@@ -121,7 +114,7 @@ public class Wordle {
      * @return True si se ha perdido la partida
      */
     public boolean lose(){
-        return this.board.getNext==(this.board.getlength);
+        return board.getNext()==(board.length());
     }
 
     /**

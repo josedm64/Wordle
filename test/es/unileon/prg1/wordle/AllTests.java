@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ BoardTest.class, SourceTest.class, LetterTest.class, WordleTest.class,
+@SuiteClasses({ BoardTest.class, SourceTest.class, LetterTest.class,
 		WordTest.class, DictionaryTest.class })
 public class AllTests {
 

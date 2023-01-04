@@ -8,7 +8,7 @@ public class BoardTest {
     Board board;
 
     @Before
-    public void setup(){
+    public void setup() throws WordleException {
         board = new Board(6);
     }
 
@@ -28,6 +28,7 @@ public class BoardTest {
     @Test
     public void emptyTest() throws WordleException {
         Word word = new Word(6);
+
         for (int i = 0; i <= 6; i++) {
             assertEquals(word.toString(), board.getAttemptedWordAt(i));
         }
@@ -42,17 +43,19 @@ public class BoardTest {
     @Test
     public void notEmptyTest() throws WordleException {
         Board board = new Board(6);
+
         Word word = new Word("sorbo");
         Word otherWord = new Word("tiros");
+        Word emptyWord = new Word(6);
 
-        board.getAttemptedWordAt(0);
-        board.getAttemptedWordAt(1);
+        board.setAttempts(word, 0);
+        board.setAttempts(otherWord, 1);
 
-        assertEquals("sorbo", board.getAttemptedWordAt(0));
-        assertEquals("tiros", board.getAttemptedWordAt(1));
+        assertEquals(word.toString(), board.getAttemptedWordAt(0));
+        assertEquals(otherWord.toString(), board.getAttemptedWordAt(1));
 
         for (int i = 2; i <= 6; i++) {
-            assertEquals("Todo vacío en azul", board.getAttemptedWordAt(i));
+            assertEquals(emptyWord.toString(), board.getAttemptedWordAt(i));
         }
     }
 }

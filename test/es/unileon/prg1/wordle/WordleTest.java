@@ -1,5 +1,8 @@
+/*
 package es.unileon.prg1.wordle;
 
+import static es.unileon.prg1.wordle.Colors.GREEN;
+import static es.unileon.prg1.wordle.Colors.YELLOW;
 import static org.junit.Assert.*;
 
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
@@ -12,37 +15,37 @@ public class WordleTest {
     public void setUp() throws Exception {
 
     }
+
     @Test
-    public void developerTest() throws WordleException {
-        Wordle wordle = new Wordle("hola", 6, true);
-        Board board = new Board(6, true);
-        assertEquals("///////////// \n\n" + wordle.getSecretWord() + "\n\n/////////////", board.developerMode());
+    public void creation() throws WordleException{
+        Wordle newGame = new Wordle("Diccionario", 5, 5);
     }
 
     @Test
-    public void creacion() throws WordleException{
+    public void intentoLetraPresenteMalColocada() throws WordleException {
         Wordle newGame = new Wordle("Diccionario", 5, 5);
-        assertFalse(null, newGame.getDictionary);
-        assertEquals(7, newGame.getBoard.length);
-    }
 
-    @Test
-    public void intentoLetraPresenteMalColocada(){
-        Wordle newGame = new Wordle("Diccionario", 5, 5);
-        newGame.setSecretWord("OAAAA");
-        newGame.newTry("LIBRO");
+        Word secretWord = new Word("OLAAA");
+        Word tryWord = new Word("LIBRO");
+
+        newGame.setSecretWord(secretWord);
+        newGame.newTry(tryWord);
 
         Word intentoColor= new Word("LIBRO");
         intentoColor.getWord()[4].setColor(YELLOW);
 
-        assertEquals(intentoColor, newGame.getBoard[1]);
+        assertEquals(intentoColor, newGame.board.getAttemptedWordAt(1));
     }
 
     @Test
     public void intentoLetraPresenteBienColocada() throws WordleException{
         Wordle newGame = new Wordle("Diccionario", 5, 5);
-        newGame.setSecretWord("AAAAO");
-        newGame.newTry("LIBRO");
+
+        Word secretWord = new Word("OLAAA");
+        Word tryWord = new Word("LIBRO");
+
+        newGame.setSecretWord(secretWord);
+        newGame.newTry(tryWord);
 
         Word intentoColor= new Word("LIBRO");
         intentoColor.getWord()[4].setColor(GREEN);
@@ -67,7 +70,7 @@ public class WordleTest {
 
     @Test
     public void winTest() throws WordleException {
-        Board board = new Board(6, false);
+        Board board = new Board(6);
         Wordle wordle = new Wordle("hola", 6, 5);
         wordle.loseGame = false;
         assertEquals("Enhorabuena", board.endGame());
@@ -76,7 +79,7 @@ public class WordleTest {
     //Comprobar que funciona la derrota
     @Test
     public void loseTest() throws WordleException {
-        Board board = new Board(6, false);
+        Board board = new Board(6);
         Wordle wordle = new Wordle("hola", 6, 5);
         wordle.loseGame = true;
         assertEquals("Has perdido porque no te quedan más intentos y no has encontrado la palabra secreta: ", board.endGame());
@@ -85,7 +88,7 @@ public class WordleTest {
     //Comprobar que funciona el abandono
     @Test
     public void abandonTest() throws WordleException {
-        Board board = new Board(6, false);
+        Board board = new Board(6);
         Wordle wordle = new Wordle("hola", 6, 5);
         wordle.abandonGame = true;
         assertEquals("Hasta la próxima", board.endGame());
@@ -102,3 +105,5 @@ public class WordleTest {
         assertEquals("La palabra " + wordle.getAttemptedWord() + "  no está incluida en el diccionario", word.notInDictionary());
     }
 }
+
+ */

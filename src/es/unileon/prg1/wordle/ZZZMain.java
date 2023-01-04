@@ -1,3 +1,4 @@
+/*
 package es.unileon.prg1.wordle;
 
 import java.util.Random;
@@ -10,7 +11,6 @@ import java.util.Scanner;
  * @author usuarioDeGitHub
  *
  * @version 1.0
- */
 
 public class Main {
 
@@ -71,7 +71,7 @@ public class Main {
         //Enseña tiempo y aciertos al finalizar el programa
         System.out.println("Respuesta correcta, has tardado " + ((System.currentTimeMillis() - tiempoInicio) / 1000) + " segundos y " + intentos + " intentos.");
 
-         */
+
     }
 
     /**
@@ -79,7 +79,7 @@ public class Main {
      * @param palabraUsuario palabra introducida por el usuario
      * @param palabraCorrecta palabra secreta
      * @return palabra coloreada
-     */
+
     public static boolean colorLetras(char[] palabraUsuario, char[] palabraCorrecta) {
         boolean correcta = true;
         int[] colorDeLetra = new int[5];
@@ -119,3 +119,4 @@ public class Main {
         return diccionarioPalabras[(int)(Math.random() * (diccionarioPalabras.length - 1))]; //just returns a random word from this large list
     }
 }
+*/
