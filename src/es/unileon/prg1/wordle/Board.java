@@ -1,5 +1,7 @@
 package es.unileon.prg1.wordle;
 
+import java.util.Arrays;
+
 /**
  * La clase que se ocupa de preparar la interfaz del usuario, introducir las palabras de los intentos, llevar la cuenta de ellos y, en modo desarrollador, enseñar la palabra secreta
  *
@@ -15,11 +17,15 @@ public class Board {
     private int next;
 
     //Constructor
-    public Board(int nTries) throws WordleException {
+    public Board(int nTries, int nLetters) throws WordleException {
         if(nTries < 1){
             throw new WordleException("El número de intentos no puede ser menor de uno");
         }
         attempts = new Word[nTries];
+
+        Word emptyWord = new Word(nLetters);
+
+        Arrays.fill(attempts, emptyWord);
     }
 
     public int getNext(){

@@ -52,7 +52,7 @@ public class LetterTest {
 	@Test
 	public void testGetLetter() {
 		assertEquals('A', this.a.getLetter());
-		assertEquals('a', this.a.getLetter());
+		assertFalse('a' != this.a.getLetter());
 	}
 
 	@Test

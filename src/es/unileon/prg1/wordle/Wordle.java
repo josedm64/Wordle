@@ -54,7 +54,7 @@ public class Wordle {
         if (tries<0){
             throw new WordleException("Los intentos no pueden ser negativos");
         }
-        this.board = new Board(tries);
+        this.board = new Board(tries, wordLength);
     }
     /**
      * Getter de secretWord

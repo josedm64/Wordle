@@ -4,24 +4,27 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
+import java.util.Arrays;
+
 public class BoardTest {
     Board board;
 
     @Before
     public void setup() throws WordleException {
-        board = new Board(6);
+        board = new Board(6, 6);
+
     }
 
     //Comprobar que se crea el tablero correctamente
     @Test (expected = WordleException.class)
     public void constructorZeroTest() throws WordleException {
-        Board boardZero = new Board(0);
+        Board boardZero = new Board(0, 6);
     }
 
     //Comprobar que se crea el tablero correctamente
     @Test (expected = WordleException.class)
     public void constructorNegativeTest() throws WordleException {
-        Board boardNegative = new Board(-1);
+        Board boardNegative = new Board(-1, 6);
     }
 
     //Comprobar que el tablero funciona correctamente vacío
@@ -29,11 +32,11 @@ public class BoardTest {
     public void emptyTest() throws WordleException {
         Word word = new Word(6);
 
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i < 6; i++) {
             assertEquals(word.toString(), board.getAttemptedWordAt(i));
         }
 
-        Board otherBoard = new Board(6);
+        Board otherBoard = new Board(6, 6);
         for (int i = 0; i <= 6; i++) {
             assertEquals(word.toString(), otherBoard.getAttemptedWordAt(i));
         }
@@ -42,8 +45,6 @@ public class BoardTest {
     //Comprobar que el tablero funciona correctamente con palabras
     @Test
     public void notEmptyTest() throws WordleException {
-        Board board = new Board(6);
-
         Word word = new Word("sorbo");
         Word otherWord = new Word("tiros");
         Word emptyWord = new Word(6);
