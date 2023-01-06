@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  * @version 0.0
  */
 public class Word {
-    private Letter word[];
+    private Letter[] word;
     private static final Logger logger = LogManager.getLogger(Word.class);
 
     /**

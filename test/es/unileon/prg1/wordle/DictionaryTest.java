@@ -8,7 +8,7 @@ public class DictionaryTest {
     Dictionary dictionary;
     @Before
     public void setup() throws WordleException{
-        dictionary = new Dictionary("smalldictionary.txt",5);
+        dictionary = new Dictionary("smallDictionary",5);
     }
 
     @Test

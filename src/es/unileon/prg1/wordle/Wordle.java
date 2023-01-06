@@ -68,7 +68,7 @@ public class Wordle {
      * Clase que comprueba que el intento es válido
      * @param word palabra a validar
      */
-    public void newPlay(String word){
+    public void play(String word){
         Word wordTry = new Word(word);
         newTry(wordTry);
         board.setAttempts(wordTry, board.getNext());

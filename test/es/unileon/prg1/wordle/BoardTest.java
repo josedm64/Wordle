@@ -37,7 +37,7 @@ public class BoardTest {
         }
 
         Board otherBoard = new Board(6, 6);
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i < 6; i++) {
             assertEquals(word.toString(), otherBoard.getAttemptedWordAt(i));
         }
     }
@@ -55,7 +55,7 @@ public class BoardTest {
         assertEquals(word.toString(), board.getAttemptedWordAt(0));
         assertEquals(otherWord.toString(), board.getAttemptedWordAt(1));
 
-        for (int i = 2; i <= 6; i++) {
+        for (int i = 2; i < 6; i++) {
             assertEquals(emptyWord.toString(), board.getAttemptedWordAt(i));
         }
     }

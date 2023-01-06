@@ -1,11 +1,11 @@
-<project xmlns:jacoco="antlib:org.jacoco.ant" name="Wordle" basedir="." default="todo">
+<project name="Wordle" basedir="." default="todo" xmlns:jacoco="antlib:org.jacoco.ant">
     <property name="coverage.result.dir" location="./coverage_report"/>
     <property name="coverage.result.report.dir" location="${coverage.result.dir}/site/jacoco"/>
     <property name="coverage.result.exec.file" location="${coverage.result.dir}/jacoco.exec"/>
 
     <property name="src" value="src"/>
     <property name="test" value="test"/>
-    <property name="lib" value="lib/"/>
+    <property name="lib" value="./lib/junit-4.8.2.jar:./lib/log4j-api-2.5.jar:./lib/log4j-core-2.5.jar:./lib/jacocoant.jar"/>
     <property name="conf" value="etc"/>
     <property name="classes" value="out/classes"/>
     <property name="doc" value="out/doc"/>
@@ -23,24 +23,25 @@
     </target>
 
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-	    <classpath path = "./lib/jacocoant.jar"/>
+        <classpath path = "./lib/jacocoant.jar"/>
     </taskdef>
-    
-    <target name="compile" depends="clean">
+
+    <target name="compilar" depends="clean">
         <mkdir dir="${classes}"/>
-        <javac srcdir="${src}" destdir="${classes}" classpath="${lib}"
+        <javac srcdir="${src}" destdir="${classes}" classpath="${lib}" debug="true"
                includeantruntime="false"/>
         <echo message="Compilation...done"/>
     </target>
 
-    <target name="compileTests" depends="compile">
+    <target name="compilarTests" depends="compilar">
         <mkdir dir="${classes}"/>
-        <javac srcdir="${test}" destdir="${classes}" classpath="${lib}"
-               includeantruntime="false"/>
+
+        <javac srcdir="${test}" destdir="${classes}" classpath="${lib}" debug="true" includeantruntime="false"/>
+
         <echo message="Test compilation...done"/>
     </target>
 
-    <target name="test" depends="compileTests">
+    <target name="test" depends="compilarTests">
         <mkdir dir="${log}"/>
 
         <jacoco:report destfile="${coverage.result.exec.file}">
@@ -65,40 +66,53 @@
         </jacoco:report>
     </target>
 
-<target name="report" depends="test">
-    <jacoco:report>
-        <executiondata>
-            <file file="${coverage.result.exec.file}"/>
-        </executiondata>
-        <structure name="Coverage with Jacoco">
-            <classfiles>
-                <fileset dir="${classes}"/>
-            </classfiles>
-            <sourcefiles encoding="UTF-8">
-                <fileset dir="${src}"/>
-            </sourcefiles>
-        </structure>
-        <html destdir="${coverage.result.report.dir}"/>
-        <csv destfile="${coverage.result.report.dir}/report.csv"/>
-        <xml destfile="${coverage.result.report.dir}/report.xml"/>
-    </jacoco:report>
-    <echo message="Generating coverage report with jacoco...done"/>
-</target>
+    <target name="report" depends="test">
+        <jacoco:report>
+            <executiondata>
+                <file file="${coverage.result.exec.file}"/>
+            </executiondata>
 
-    <target name="documentation" depends="compileTests">
+            <structure name="Coverage with Jacoco">
+                <classfiles>
+                    <fileset dir="${classes}"/>
+                </classfiles>
+
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="${src}"/>
+                </sourcefiles>
+            </structure>
+
+            <html destdir="${coverage.result.report.dir}"/>
+            <csv destfile="${coverage.result.report.dir}/report.csv"/>
+            <xml destfile="${coverage.result.report.dir}/report.xml"/>
+        </jacoco:report>
+
+        <echo message="Generating coverage report with jacoco...done"/>
+    </target>
+
+    <target name="documentation" depends="compilarTests">
         <mkdir dir="doc"/>
-        <javadoc sourcepath="${src}" destdir="${doc}">
+
+        <javadoc sourcepath="${src}" destdir="${doc}" classpath="${lib}">
             <doctitle>
                 <![CDATA[<h1>Wordle</h1>]]>
             </doctitle>
         </javadoc>
     </target>
 
-    <target name="logging" depends="compileTests">
-        <mkdir dir="${log}"/>
+    <target name="try" depends="compilar">
+        <java classname="${paquetes}.MainWordle" fork="true">
+            <arg value = "fullDictionary.txt"/>
+            <arg value = "4"/>
+            <arg value = "5"/>
 
+            <classpath>
+                <pathelement path="${classes}"/>
+                <pathelement path="${lib}"/>
+                <pathelement path="${conf}"/>
+            </classpath>
+        </java>
     </target>
 
-    <target name="todo" depends="report"/>
-
+    <target name="todo" depends="report, documentation, try"/>
 </project>
